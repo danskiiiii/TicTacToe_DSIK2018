@@ -224,11 +224,11 @@ namespace TicTacToe_DSIK2018
                 BitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(LoadImage(data)));
 
-                using (var fileStream = new System.IO.FileStream("data.jpg", System.IO.FileMode.Create))
+                using (var fileStream = new System.IO.FileStream("data.png", System.IO.FileMode.Create))
                 {
                     encoder.Save(fileStream);
                 }
-                Process.Start("data.jpg");
+                Process.Start("data.png");
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
