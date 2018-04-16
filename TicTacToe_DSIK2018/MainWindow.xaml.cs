@@ -45,7 +45,7 @@ namespace TicTacToe_DSIK2018
         {
             turn = 1;
         }
-
+        //method for determining if one of the players won the round
         private void IsRoundOver(string btnContent)
         {
             if (((button1.Content).ToString() == btnContent & button2.Content.ToString() == btnContent &
@@ -98,7 +98,7 @@ namespace TicTacToe_DSIK2018
                 btn.IsEnabled = true;
             }
         }
-
+        //logic behind main Wrap Panel buttons
         private void MoveButton_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
@@ -128,7 +128,7 @@ namespace TicTacToe_DSIK2018
             waitLabel.Visibility = Visibility.Visible;
         }
 
-
+        // listener method for awaiting server packets
         private void StartListening()
         {
             try
@@ -141,6 +141,7 @@ namespace TicTacToe_DSIK2018
                         string temp = Encoding.ASCII.GetString(data, 0, data.Length);
                         string[] lines = Regex.Split(temp, " ");
 
+                        //determines in-game actions based on data from server
                         foreach (Button bttn in mainWrapPanel.Children)
                         {
                             if (bttn.Name == lines[0]
@@ -160,7 +161,7 @@ namespace TicTacToe_DSIK2018
                             }
                         }
 
-                        //determine starting player
+                        //determines sides (X and O) and who starts in  first turn
                         if (lines[0][0] == 'X')
                         {
                             turn = 1;
@@ -194,7 +195,7 @@ namespace TicTacToe_DSIK2018
                 this._listenThread.Start();
             }
         }
-
+        //static method for processing data from byte format into image format
         private static BitmapImage LoadImage(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0) return null;
@@ -212,7 +213,7 @@ namespace TicTacToe_DSIK2018
             image.Freeze();
             return image;
         }
-
+        // logic for file download button
         private void GetFileButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -234,6 +235,8 @@ namespace TicTacToe_DSIK2018
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+
+        // logic for new game/server connection button
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
             data = Encoding.ASCII.GetBytes("ready");
