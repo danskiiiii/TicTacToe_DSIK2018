@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicTacToe_DSIK2018"
         mc:Ignorable="d"
-        Title="MainWindow"  Width="600" Height="500">
+        Title="MainWindow"  Width="600" Height="500" ResizeMode="CanMinimize">
     <Grid x:Name="RootGrid">
         <WrapPanel x:Name="mainWrapPanel" Height="130" HorizontalAlignment="Left" Margin="232,117,0,0" VerticalAlignment="Top" Width="151">
             <Button x:Name="button1" Content="" HorizontalAlignment="Left" Height="43" Margin="0" VerticalAlignment="Top" Width="50" Foreground="Purple" FontWeight="Bold" FontSize="16" BorderBrush="{x:Null}" Click="MoveButton_Click"/>
