@@ -89,9 +89,23 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="tictactoe_server\srv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tictactoe_server\myfile0.jpg" />
+    <Resource Include="tictactoe_server\myfile1.jpg" />
+    <Resource Include="tictactoe_server\myfile2.jpg" />
+    <Resource Include="tictactoe_server\myfile3.jpg" />
+    <Resource Include="tictactoe_server\myfile4.jpg" />
+    <Resource Include="tictactoe_server\myfile5.jpg" />
+    <Resource Include="tictactoe_server\myfile6.jpg" />
+    <Resource Include="tictactoe_server\myfile7.jpg" />
+    <Resource Include="tictactoe_server\myfile8.jpg" />
+    <Resource Include="tictactoe_server\myfile9.jpg" />
+    <Content Include="tictactoe_server\server.c" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

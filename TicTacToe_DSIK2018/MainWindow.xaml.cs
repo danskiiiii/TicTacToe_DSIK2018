@@ -17,7 +17,7 @@ namespace TicTacToe_DSIK2018
     /// </summary>
     public partial class MainWindow : Window
     {
-        int scoreO, scoreX, turn;
+        int scoreO, scoreX, turn=1;
         private Thread _listenThread;
         string whoAmI = string.Empty;
 
@@ -27,7 +27,6 @@ namespace TicTacToe_DSIK2018
         IPEndPoint serverIpAndPort = new IPEndPoint(IPAddress.Any, 0);
 
         public MainWindow()
-            : base()
         {
             this.InitializeComponent();
 
@@ -37,14 +36,9 @@ namespace TicTacToe_DSIK2018
             yourMoveLabel.Visibility = Visibility.Collapsed;
             waitLabel.Visibility = Visibility.Visible;
             getFileButton.IsEnabled = false;
-
-
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            turn = 1;
-        }
+       
         //method for determining if one of the players won the round
         private void IsRoundOver(string btnContent)
         {
