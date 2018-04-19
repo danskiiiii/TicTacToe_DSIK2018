@@ -18,20 +18,17 @@ namespace TicTacToe_DSIK2018
     public partial class MainWindow : Window
     {
         int scoreO, scoreX, turn=1;
-        private Thread _listenThread;
-        string whoAmI = string.Empty;
+        private Thread listenThread;
+        string playerID = string.Empty;
 
         // static IPAddress address = IPAddress.Parse("150.254.78.29");
         byte[] data;
-        UdpClient server = new UdpClient("150.254.78.29", 4105);
-        IPEndPoint serverIpAndPort = new IPEndPoint(IPAddress.Any, 0);
+        UdpClient server;
+        IPEndPoint serverIpAndPort;
 
         public MainWindow()
         {
-            this.InitializeComponent();
-
-            this._listenThread = new Thread(new ThreadStart(this.StartListening));
-            this._listenThread.Start();
+            this.InitializeComponent();            
 
             yourMoveLabel.Visibility = Visibility.Collapsed;
             waitLabel.Visibility = Visibility.Visible;
@@ -61,12 +58,12 @@ namespace TicTacToe_DSIK2018
             {
                 if (btnContent == "O")
                 {
-                    MessageBox.Show("PLAYER O WINS");
+                    MessageBox.Show("Player O WINS");
                     playerO_currentScoreLabel.Content = ++scoreO;
                 }
                 else if (btnContent == "X")
                 {
-                    MessageBox.Show("PLAYER X WINS");
+                    MessageBox.Show("Player X WINS");
                     playerX_currentScoreLabel.Content = ++scoreX;
                 }
                 ResetButtons();
@@ -79,7 +76,7 @@ namespace TicTacToe_DSIK2018
                     if (btn.IsEnabled == true)
                         return;
                 }
-                MessageBox.Show("GAME OVER NO ONE WINS");
+                MessageBox.Show("GAME OVER, No Winner");
                 ResetButtons();
             }
         }
@@ -139,7 +136,7 @@ namespace TicTacToe_DSIK2018
                         foreach (Button bttn in mainWrapPanel.Children)
                         {
                             if (bttn.Name == lines[0]
-                                && Convert.ToString(lines[1][0]) != whoAmI)
+                                && Convert.ToString(lines[1][0]) != playerID)
                             {
                                 bttn.Content = Convert.ToString(lines[1][0]);
                                 bttn.IsEnabled = false;
@@ -151,7 +148,7 @@ namespace TicTacToe_DSIK2018
                                 }
                                 yourMoveLabel.Visibility = Visibility.Visible;
                                 waitLabel.Visibility = Visibility.Collapsed;
-                                turnLabel.Content = whoAmI;
+                                turnLabel.Content = playerID;
                             }
                         }
 
@@ -159,7 +156,7 @@ namespace TicTacToe_DSIK2018
                         if (lines[0][0] == 'X')
                         {
                             turn = 1;
-                            whoAmI = "X";
+                            playerID = "X";
                             playerX_scoreLabel.Content = "ME(X)";
                             playerO_scoreLabel.Content = "O";
                             turnLabel.Content = "O";
@@ -171,7 +168,7 @@ namespace TicTacToe_DSIK2018
                         if (lines[0][0] == 'O')
                         {
                             turn = 1;
-                            whoAmI = "O";
+                            playerID = "O";
                             playerO_scoreLabel.Content = "ME(O)";
                             playerX_scoreLabel.Content = "X";
                             turnLabel.Content = "O";
@@ -184,9 +181,8 @@ namespace TicTacToe_DSIK2018
                 }
             }
             catch (Exception ex) {
-                MessageBox.Show(ex.Message);
-                this._listenThread = new Thread(new ThreadStart(this.StartListening));
-                this._listenThread.Start();
+                this.listenThread = new Thread(new ThreadStart(this.StartListening));
+                this.listenThread.Start();
             }
         }
         //static method for processing data from byte format into image format
@@ -207,6 +203,12 @@ namespace TicTacToe_DSIK2018
             image.Freeze();
             return image;
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
         // logic for file download button
         private void GetFileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -214,7 +216,7 @@ namespace TicTacToe_DSIK2018
             {
                 data = Encoding.ASCII.GetBytes("getfile");
                 server.Send(data, data.Length);
-                Thread.Sleep(2500);
+                Thread.Sleep(2000);
 
                 BitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(LoadImage(data)));
@@ -226,13 +228,20 @@ namespace TicTacToe_DSIK2018
                 Process.Start("data.png");
 
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show("Panda not found, try again later"); }
         }
 
 
         // logic for new game/server connection button
         private void NewGameButton_Click(object sender, RoutedEventArgs e)
         {
+            if (server != null) { server.Close(); listenThread.Abort(); } 
+            server = new UdpClient(serverIpTextBox.Text, Convert.ToInt32(serverPortTextBox.Text));
+            serverIpAndPort = new IPEndPoint(IPAddress.Any, 0);
+
+            this.listenThread = new Thread(new ThreadStart(this.StartListening));
+            this.listenThread.Start();
+
             data = Encoding.ASCII.GetBytes("ready");
             server.Send(data, data.Length);
 
@@ -240,7 +249,6 @@ namespace TicTacToe_DSIK2018
             playerO_currentScoreLabel.Content = scoreO;
             playerX_currentScoreLabel.Content = scoreX;
             ResetButtons();
-            // server.Close();  
         }
     }
 }
