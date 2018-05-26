@@ -1,4 +1,4 @@
-##TicTacToe_DSIK2018 ##
+## TicTacToe_DSIK2018 ##
 This app is a small project for Computer Networks class. 
 
 It's a simple online Tic Tac Toe game for 2 players. 
