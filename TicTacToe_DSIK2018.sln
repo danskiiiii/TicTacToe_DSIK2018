@@ -5,6 +5,21 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe_DSIK2018", "TicTacToe_DSIK2018\TicTacToe_DSIK2018.csproj", "{D24ED8E3-4A0C-475D-8274-4F7B8187F4EC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tictactoe_server_C", "tictactoe_server_C", "{6EBE104D-23A9-4FA0-A4AE-B41F75FCEE20}"
+	ProjectSection(SolutionItems) = preProject
+		tictactoe_server_C\myfile0.jpg = tictactoe_server_C\myfile0.jpg
+		tictactoe_server_C\myfile1.jpg = tictactoe_server_C\myfile1.jpg
+		tictactoe_server_C\myfile2.jpg = tictactoe_server_C\myfile2.jpg
+		tictactoe_server_C\myfile3.jpg = tictactoe_server_C\myfile3.jpg
+		tictactoe_server_C\myfile4.jpg = tictactoe_server_C\myfile4.jpg
+		tictactoe_server_C\myfile5.jpg = tictactoe_server_C\myfile5.jpg
+		tictactoe_server_C\myfile6.jpg = tictactoe_server_C\myfile6.jpg
+		tictactoe_server_C\myfile7.jpg = tictactoe_server_C\myfile7.jpg
+		tictactoe_server_C\myfile8.jpg = tictactoe_server_C\myfile8.jpg
+		tictactoe_server_C\myfile9.jpg = tictactoe_server_C\myfile9.jpg
+		tictactoe_server_C\server.c = tictactoe_server_C\server.c
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
